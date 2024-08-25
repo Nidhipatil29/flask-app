@@ -1,0 +1,29 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Get source code') {
+            steps {
+                  git branch: 'main', url: ' https://github.com/Nidhipatil29/flask-app'
+                sh 'ls'
+                echo 'Source Code acquired successfully ! '
+            }
+        }
+        stage('Build docker image'){    
+            steps{
+            
+                sh 'docker build -t testingdocker .'
+                echo 'Docker image created.'
+                
+            }
+            }
+        stage('Run docker image'){    
+            steps{
+                sh 'docker run -d -p 5000:5000 testingdocker'
+                echo 'Flask app running. '
+            }
+        }
+    }
+}
+    
