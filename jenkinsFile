@@ -17,10 +17,17 @@ pipeline {
             }
         }
 
-       /* stage('stop container mytestcontainer ') {
+        stage('check') {
+            steps {
+              sh 'curl localhost:5000'
+            }
+        }
+        
+
+        stage('stop container ') {
             steps {
               sh 'docker stop mytestcontainer '
             }
-        }*/
+        }
     }
 }
